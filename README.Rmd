@@ -77,7 +77,7 @@ file_info(fs::dir_ls(temp_out_dir, glob = "*zip")) |>
 
 Now, let's consider the scenario where you share your code with someone else or revisit it yourself after a year. There's no guarantee the code will run because it relies on a specific CLI tool installed on the system. In the worst case, it might run without throwing any errors but produce different results, so you might not even realize that.
 
-The exact same code run on the same system but with an updated version of `fastqc` (0.12.1 instead of 0.11.2) generates a different file, and its size is different as well.
+
 
 ```{r echo=FALSE, message=FALSE}
 fastq_file <- system.file("extdata", "sample1_L001_R1_001.fastq.gz", package = "condathis")
@@ -93,6 +93,8 @@ file_info(fs::dir_ls(temp_out_dir, glob = "*zip")) |>
   select(file_name, size)
 ```
 
+
+The exact same code run on the same system but with an updated version of `fastqc` (0.12.1 instead of 0.11.2) generates a different file, and its size is different as well.
 
 ```{r echo=FALSE}
 temp_out_dir_2 <- tempdir()
