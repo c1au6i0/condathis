@@ -56,8 +56,8 @@ The `fastqc` command synopsis is `fastqc <path-to-fastq-file> -o <output-dir>`. 
 
 ```{r eval=FALSE}
 fastq_file <- system.file("extdata", "sample1_L001_R1_001.fastq.gz", package = "condathis")
-
 temp_out_dir <- tempdir()
+
 system2(command = "fastqc", args = c(fastq_file,  "-o", temp_out_dir))
 ```
 
@@ -92,7 +92,7 @@ file_info(fs::dir_ls(temp_out_dir, glob = "*zip")) |>
 
 Now, let's consider the scenario where you share your code with someone else or revisit it yourself after a year. There's no guarantee the code will run because it relies on a specific CLI tool installed on the system. In the worst case, it might run without throwing any errors but produce different results, so you might not even realize that.
 
-The exact same code run on the same system but with an updated version of `fastqc` (0.12.1 instead of 0.11.2) generates a different file, and its size is different as well.
+The exact same code run on the same system but with an updated version of `fastqc` (0.12.1 instead of 0.11.2) generates a different file, and its size is different as well: *446k instead of 424k*.
 
 ```{r echo=FALSE}
 temp_out_dir_2 <- tempdir()
@@ -176,8 +176,8 @@ This isolation feature of {condathis} allows not only running different versions
 
 ## Details
 
-The package `{condathis}` relies on [**`micromamba`**](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) to bring **reproducibility and isolation**. Micromamba is a lightweight, fast, and efficient package manager that "does not need a base environment and does not come with a default version of Python".
+The package `{condathis}` relies on [**`micromamba`**](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) to bring **reproducibility and isolation**. `micromamba` is a lightweight, fast, and efficient package manager that "does not need a base environment and does not come with a default version of Python".
 
-The integration of `micromamba` into `R `is handled using the `processx` and `withr` packages. The package  `processx` runs external processes and manages their input and output, ensuring that commands to `micromamba` are executed correctly from within R. The package `withr` temporarily modifies environment variables and settings, allowing Micromamba to run smoothly without permanently altering your R environment.
+The integration of `micromamba` into `R `is handled using the `processx` and `withr` packages. The package  `processx` runs external processes and manages their input and output, ensuring that commands to `micromamba` are executed correctly from within R. The package `withr` temporarily modifies environment variables and settings, allowing `micromamba` to run smoothly without permanently altering your R environment.
 
 

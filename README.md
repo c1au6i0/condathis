@@ -61,8 +61,8 @@ where fastqc saves its quality control reports.
 
 ``` r
 fastq_file <- system.file("extdata", "sample1_L001_R1_001.fastq.gz", package = "condathis")
-
 temp_out_dir <- tempdir()
+
 system2(command = "fastqc", args = c(fastq_file,  "-o", temp_out_dir))
 ```
 
@@ -80,6 +80,11 @@ file_info(fs::dir_ls(temp_out_dir, glob = "*zip")) |>
   select(file_name, size)
 ```
 
+    #> # A tibble: 1 × 2
+    #>   file_name                             size
+    #>   <chr>                          <fs::bytes>
+    #> 1 sample1_L001_R1_001_fastqc.zip        424K
+
 Now, let’s consider the scenario where you share your code with someone
 else or revisit it yourself after a year. There’s no guarantee the code
 will run because it relies on a specific CLI tool installed on the
@@ -88,12 +93,7 @@ produce different results, so you might not even realize that.
 
 The exact same code run on the same system but with an updated version
 of `fastqc` (0.12.1 instead of 0.11.2) generates a different file, and
-its size is different as well.
-
-    #> # A tibble: 1 × 2
-    #>   file_name                             size
-    #>   <chr>                          <fs::bytes>
-    #> 1 sample1_L001_R1_001_fastqc.zip        424K
+its size is different as well: *446k instead of 424k*.
 
     #> # A tibble: 1 × 2
     #>   file_name                             size
@@ -145,11 +145,11 @@ In the our temp dir, `fastqc`generated the output files as expected.
 
 ``` r
 fs::dir_ls(temp_out_dir_2)
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpSxHysq/libloc_220_e600d766ecff9728.rds
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpSxHysq/libloc_253_f6724fe3a7174438.rds
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpSxHysq/libloc_263_425eb536d80dd010.rds
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpSxHysq/sample1_L001_R1_001_fastqc.html
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpSxHysq/sample1_L001_R1_001_fastqc.zip
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/libloc_220_e600d766ecff9728.rds
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/libloc_253_f6724fe3a7174438.rds
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/libloc_263_425eb536d80dd010.rds
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/sample1_L001_R1_001_fastqc.html
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/sample1_L001_R1_001_fastqc.zip
 ```
 
 The code that we created with `{condathis}` **use a system CLI tool but
@@ -207,13 +207,13 @@ on different versions of Python.
 
 The package `{condathis}` relies on
 [**`micromamba`**](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)
-to bring **reproducibility and isolation**. Micromamba is a lightweight,
-fast, and efficient package manager that “does not need a base
-environment and does not come with a default version of Python”.
+to bring **reproducibility and isolation**. `micromamba` is a
+lightweight, fast, and efficient package manager that “does not need a
+base environment and does not come with a default version of Python”.
 
 The integration of `micromamba` into `R`is handled using the `processx`
 and `withr` packages. The package `processx` runs external processes and
 manages their input and output, ensuring that commands to `micromamba`
 are executed correctly from within R. The package `withr` temporarily
-modifies environment variables and settings, allowing Micromamba to run
-smoothly without permanently altering your R environment.
+modifies environment variables and settings, allowing `micromamba` to
+run smoothly without permanently altering your R environment.
