@@ -120,11 +120,11 @@ compatible with the specific operating system.
 condathis::create_env(packages = "fastqc==0.12.1", env_name = "fastqc_env")
 ```
 
-Then we run the command inside the enviroment just create with that
-specific version of fastqc
+Then we run the command inside the enviroment just created which
+contains a specific version of `fastqc`.
 
 The `out` object contains info regarding the exit status, standard
-error, standard output and timeout if any
+error, standard output and timeout if any.
 
 ``` r
 out
@@ -145,11 +145,11 @@ In the our temp dir, `fastqc`generated the output files as expected.
 
 ``` r
 fs::dir_ls(temp_out_dir_2)
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/libloc_220_e600d766ecff9728.rds
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/libloc_253_f6724fe3a7174438.rds
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/libloc_263_425eb536d80dd010.rds
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/sample1_L001_R1_001_fastqc.html
-#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/Rtmpbs61rY/sample1_L001_R1_001_fastqc.zip
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpP7EBJU/libloc_220_e600d766ecff9728.rds
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpP7EBJU/libloc_253_f6724fe3a7174438.rds
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpP7EBJU/libloc_263_425eb536d80dd010.rds
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpP7EBJU/sample1_L001_R1_001_fastqc.html
+#> /var/folders/bp/fpwcfq1563l21rz5gdcsfcsw0000gn/T/RtmpP7EBJU/sample1_L001_R1_001_fastqc.zip
 ```
 
 The code that we created with `{condathis}` **use a system CLI tool but

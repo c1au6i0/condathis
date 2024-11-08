@@ -127,7 +127,7 @@ rm(temp_out_dir_2)
 condathis::create_env(packages = "fastqc==0.12.1", env_name = "fastqc_env")
 ```
 
-Then we run the command inside the enviroment just create with that specific version of fastqc
+Then we run the command inside the enviroment just created which contains a specific version of `fastqc`.
 
 
 ```{r echo=FALSE}
@@ -137,7 +137,7 @@ out <- condathis::run("fastqc", fastq_file, "-o", temp_out_dir_2, # command
                env_name = "fastqc_env" # environment
                )
 ```
-The `out` object contains info regarding the exit status, standard error, standard output and timeout if any
+The `out` object contains info regarding the exit status, standard error, standard output and timeout if any.
 
 ```{r}
 out
