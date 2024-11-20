@@ -117,7 +117,7 @@ are compatible with the specific operating system.
 
 ``` r
 condathis::create_env(packages = "fastqc==0.12.1", env_name = "fastqc_env", verbose = "output")
-#> ! Environment fastqc_env already exists.
+#> ! Environment fastqc_env succesfully created.
 ```
 
 Then we run the command inside the environment just created which
